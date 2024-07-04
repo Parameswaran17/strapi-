@@ -43,6 +43,12 @@ sudo chmod +x /srv/strapi/generate_env_variables.sh  # Specify exact file
 
 cd /srv/strapi
 sudo ./generate_env_variables.sh
+sudo npm install
+sudo npm run build
+sudo pm2 start npm --name strapi -- start
+sudo pm2 save
+sudo pm2 startup
+sudo pm2 save
 EOF
 
 }
