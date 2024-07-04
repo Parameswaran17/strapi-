@@ -15,9 +15,13 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.8.5  # Adjust to the version you're using
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: ${{ secrets.AWS_REGION }}
+
+    - name: Set up AWS credentials
+      env:
+        TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        TF_VAR_region: ${{ secrets.AWS_REGION }}
+      run: echo "AWS credentials set"
 
     - name: Terraform Init
       run: terraform init
